@@ -13,7 +13,13 @@ CREATE TABLE bookings (
     UNIQUE(event_id, user_id)
 );
 
-CREATE INDEX idx_bookings_event_user ON bookings(event_id, user_id);
+-- UNIQUE(event_id, user_id) уже создаёт составной btree-индекс (event_id, user_id).
+-- По правилу leftmost-prefix он ускоряет и запросы "WHERE event_id = ...",
+-- поэтому отдельный idx_bookings_event_user был избыточен и удалён.
+--
+-- Для запроса "все брони конкретного пользователя" нужен отдельный индекс,
+-- так как user_id не является самым левым столбцом составного индекса.
+CREATE INDEX idx_bookings_user_id ON bookings(user_id);
 
 INSERT INTO events (name, total_seats) VALUES 
 ('Концерт рок-группы', 100),

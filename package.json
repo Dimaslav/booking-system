@@ -1,6 +1,6 @@
 {
   "name": "booking-system",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Система бронирования мест на мероприятия",
   "main": "server.js",
   "scripts": {
@@ -8,7 +8,11 @@
     "dev": "nodemon server.js"
   },
   "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.18.2",
+    "express-rate-limit": "^7.2.0",
+    "helmet": "^7.1.0",
     "pg": "^8.11.3",
     "redis": "^4.6.7"
   },
